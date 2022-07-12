@@ -1,0 +1,16 @@
+name: 'Publish VS Code Extension'
+branding:
+  icon: package
+  color: blue
+description: 'Publish VS Code extension to the VS Code Marketplace'
+author: 'Nicolas Hedger'
+inputs:
+  vsix:
+    required: true
+    description: Path to the bundled extension to publish
+outputs:
+  publishedExtensionURL:
+    description: URL to the published extension
+runs:
+  using: node16
+  main: dist/action.js

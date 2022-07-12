@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - releases/*
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Package the VS Code extension
+        id: package
+        uses: nhedger/package-vscode-extension@main
+        with:
+          extensionPath: test/extension
+
+      - name: Publish VS Code extension
+        uses: nhedger/publish-vscode-extension@main
+        with:
+          vsix: ${{ steps.package.outputs.packagePath }}
